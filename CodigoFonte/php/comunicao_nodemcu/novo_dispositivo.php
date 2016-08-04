@@ -1,5 +1,6 @@
 <?php
 // <includes>
+include_once('../comum/Mensagem.php');
 include_once('../conexao/DispositivoDao.php');
 // </includes>
 
@@ -14,7 +15,15 @@ $v_ativo = $_GET['ATIVO'];
 
 $v_novoDispositivo = new Dispositivo($v_id, $v_nomeDispositivo, $v_ativo);
 
-$v_DispositivoDao = new DispositivoDao();
-$v_DispositivoDao->insere($v_novoDispositivo);
+$v_dispositivoDoBanco = DispositivoDao::getInstancia()->inserir($v_novoDispositivo);
+
+if($v_dispositivoDoBanco != null)
+{
+    Mensagem::registroJaExistente();
+}
+else
+{
+  Mensagem::registroInserido();
+}
 
  ?>

@@ -31,9 +31,10 @@ class ConexaoBase
   }
 
   /**
-  * Método que irá exibir o erro encontrado na hora de executar a sql, caso houver erro
+  * Método que irá exibir o erro encontrado na hora de executar a sql de inserção ou atualização,
+  * caso houver erro.
   */
-  public function haveError($stmt)
+  public function isErroInsercaoOuAtualizacao($stmt)
   {
     if ($stmt->errorCode() != "00000") {
       echo ('Erro código ') . $stmt->errorCode() . ': ' . implode(", ", $stmt->errorInfo());
